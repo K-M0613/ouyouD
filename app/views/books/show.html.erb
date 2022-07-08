@@ -23,6 +23,22 @@
           <td class="book-comments-counter">
             <%= render "book_comments/counter", book: @book %>
           </td>
+          <td>
+            <div id="star-rate<%= @book.id %>"></div>
+             <script>
+               $('#star-rate<%= @book.id %>').empty();
+               $('#star-rate<%= @book.id %>').raty({
+                 size : 36,
+                 starOff :'<%= asset_path('star-off.png') %>',
+                 starHalf  : '<%= asset_path('star-half.png') %>',
+                 starOn :'<%= asset_path('star-on.png') %>',
+                 half : true,
+                 readOnly: true,
+                 score: <%= @book.star %>
+               });
+             </script>
+          </td>
+              
           <td class="view-count">閲覧数: <%= @book.view_counts.count %></td>
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
